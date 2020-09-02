@@ -2,6 +2,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const inspectLoader = require('../common/inspectLoader');
+// const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
@@ -19,9 +20,20 @@ module.exports = {
 	},
 	optimization: {
 		minimize: false,
+		// minimizer: [
+		// 	new TerserPlugin({
+		// 		terserOptions: {
+		// 			mangle: false,
+		// 		}
+		// 	}),
+		// ],
 	},
 	module: {
 		rules: [
+			{
+        test: /(TsMorphMetadataProvider|ts-morph)/,
+        loader: 'null-loader',
+      },
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
