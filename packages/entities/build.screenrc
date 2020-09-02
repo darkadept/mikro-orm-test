@@ -1,0 +1,8 @@
+split
+
+screen -t "Entities TS" yarn ts --watch
+screen -t "Entities Build" yarn build --watch
+
+select 0
+focus down
+select 1

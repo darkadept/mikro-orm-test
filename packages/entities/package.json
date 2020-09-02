@@ -1,0 +1,28 @@
+{
+	"name": "motest-entities",
+	"version": "0.0.1",
+	"description": "Mikro-orm test entities library",
+	"license": "MIT",
+	"author": "Mike Kornelson <darkadept@durbn.net>",
+	"private": true,
+	"engines": {
+		"node": ">=12"
+	},
+	"main": "dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist",
+		"index.js"
+	],
+	"scripts": {
+		"start": "screen -c ./build.screenrc",
+		"build": "NODE_ENV=production webpack",
+		"clean": "rimraf ./dist",
+		"ts": "tsc"
+	},
+	"dependencies": {
+		"@mikro-orm/core": "^4.0.0-rc.5",
+		"debug": "^4.1.1",
+		"uuid": "^8.3.0"
+	}
+}
