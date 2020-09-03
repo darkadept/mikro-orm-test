@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import debug from 'debug';
 import {MikroORM} from 'mikro-orm';
-import {entities} from 'motest-entities';
+import {Owner, Inverse} from 'motest-entities';
 import {mikroOrmConfig} from './mikro-orm.config';
 
 const d = debug('motest');
@@ -15,23 +15,17 @@ async function main() {
 	mo = await MikroORM.init(mikroOrmConfig);
 
 	// // Get repositories
-	// const myEntRepo = mo.em.getRepository(entities);
-	// const myPkgEntRepo = mo.em.getRepository(MyPkgEnt);
-	//
-	// // Create first entity
-	// const e1 = myEntRepo.create({
-	// 	name: 'Entity 1',
-	// });
-	// myEntRepo.persist(e1);
-	//
-	// // Create second entity
-	// const e2 = myPkgEntRepo.create({
-	// 	name: 'Entity 2,'
-	// });
-	// myPkgEntRepo.persist(e2);
-	//
-	// // Flush data
-	// await mo.em.flush();
+	const ownerRepo = mo.em.getRepository(Owner);
+	const inverseRepo = mo.em.getRepository(Inverse);
+
+	const o1 = ownerRepo.create({
+		name: 'Entity 1',
+	});
+	console.log(o1.id);
+	ownerRepo.persist(o1);
+	await mo.em.flush();
+
+	// const o2 = ownerRepo.findOne('')
 }
 
 // Execute main function, cleanup when done

@@ -1,5 +1,6 @@
 import {v4} from 'uuid';
-import {Entity, PrimaryKey, Property} from 'mikro-orm';
+import {Entity, OneToOne, PrimaryKey, Property} from 'mikro-orm';
+import {Inverse} from './Inverse';
 
 @Entity()
 export class Owner {
@@ -8,4 +9,7 @@ export class Owner {
 
 	@Property({type: 'string'})
 	name!: string;
+
+	@OneToOne({type: Inverse})
+	myInverse!: Inverse;
 }
