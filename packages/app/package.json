@@ -13,16 +13,16 @@
 		"build": "NODE_ENV=production webpack",
 		"clean": "rimraf ./dist",
 		"ts": "tsc",
-		"orm": "mikro-orm"
+		"orm": "mikro-orm",
+		"orm:recreate": "yarn orm schema:drop -r && yarn orm schema:create -r"
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.11.2",
-		"@mikro-orm/core": "^4.0.0-rc.5",
-		"@mikro-orm/postgresql": "^4.0.0-rc.5",
-		"@mikro-orm/cli": "^4.0.0-rc.5",
+		"mikro-orm": "^3.6.15",
 		"debug": "^4.1.1",
 		"dotenv": "^8.2.0",
 		"motest-entities": "^0.0.1",
+		"pg": "^8.3.3",
 		"uuid": "^8.3.0"
 	},
 	"mikro-orm": {

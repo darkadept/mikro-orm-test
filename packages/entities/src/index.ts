@@ -1,1 +1,3 @@
-export {MyPkgEnt} from './MyPkgEnt';
+import {Owner} from './Owner';
+
+export const entities = [Owner];

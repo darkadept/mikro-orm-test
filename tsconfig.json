@@ -8,7 +8,6 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"pretty": true,
-		"declaration": true,
 		"noImplicitAny": true,
 		"importsNotUsedAsValues": "error",
 		"experimentalDecorators": true,

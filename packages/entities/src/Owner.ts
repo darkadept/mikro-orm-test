@@ -1,8 +1,8 @@
 import {v4} from 'uuid';
-import {Entity, PrimaryKey, Property} from '@mikro-orm/core';
+import {Entity, PrimaryKey, Property} from 'mikro-orm';
 
 @Entity()
-export class MyPkgEnt {
+export class Owner {
 	@PrimaryKey({type: 'uuid'})
 	id = v4();
 
