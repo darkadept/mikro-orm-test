@@ -7,6 +7,18 @@ import {mikroOrmConfig} from './mikro-orm.config';
 const d = debug('motest');
 let mo: MikroORM;
 
+process.on('unhandledRejection', err => {
+	console.log('\x1b[1m\x1b[31m[error] Unhandled Rejection\x1b[0m');
+	console.log(err);
+	process.exit(1);
+});
+
+process.on('uncaughtException', err => {
+	console.log('\x1b[1m\x1b[31m[error] Uncaught Exception\x1b[0m');
+	console.log(err);
+	process.exit(1);
+});
+
 /**
  * Main Async Function
  */
@@ -34,4 +46,8 @@ main().then(() => {
 		d('Application complete');
 		process.exit(0);
 	});
+}).catch(err => {
+	console.log('\x1b[1m\x1b[31m[error] Caught Error\x1b[0m');
+	console.log(err);
+	process.exit(1);
 });
