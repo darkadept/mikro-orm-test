@@ -1,9 +1,23 @@
+import 'dotenv/config';
+import debug from 'debug';
 import {MikroORM} from '@mikro-orm/core';
-import {MyPkgEnt} from 'motest-entities';
+import {entities} from 'motest-entities';
 import {mikroOrmConfig} from './mikro-orm.config';
-import {MyEnt} from './MyEnt';
 
+const d = debug('motest');
 let mo: MikroORM;
+
+process.on('unhandledRejection', err => {
+	console.log('\x1b[1m\x1b[31m[error] Unhandled Rejection\x1b[0m');
+	console.log(err);
+	process.exit(1);
+});
+
+process.on('uncaughtException', err => {
+	console.log('\x1b[1m\x1b[31m[error] Uncaught Exception\x1b[0m');
+	console.log(err);
+	process.exit(1);
+});
 
 /**
  * Main Async Function
@@ -13,8 +27,8 @@ async function main() {
 	mo = await MikroORM.init(mikroOrmConfig);
 
 	// Get repositories
-	const myEntRepo = mo.em.getRepository(MyEnt);
-	const myPkgEntRepo = mo.em.getRepository(MyPkgEnt);
+	const myEntRepo = mo.em.getRepository(entities.MyPkg);
+	const myPkgEntRepo = mo.em.getRepository(entities.MyPkgEnt);
 
 	// Create first entity
 	const e1 = myEntRepo.create({
@@ -35,6 +49,11 @@ async function main() {
 // Execute main function, cleanup when done
 main().then(() => {
 	mo.close(true).then(() => {
-		console.log('Application complete');
+		d('Application complete');
+		process.exit(0);
 	});
+}).catch(err => {
+	console.log('\x1b[1m\x1b[31m[error] Caught Error\x1b[0m');
+	console.log(err);
+	process.exit(1);
 });
