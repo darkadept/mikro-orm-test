@@ -34,15 +34,13 @@ async function main() {
 	contactRepo.remove({});
 	addressRepo.remove({});
 	employeeRepo.remove({});
+	await mo.em.flush();
 
 	// Create a Contact and and Employee
-	const contactCreate = contactRepo.create({
-		name: 'My Contact',
-	});
-	const employeeCreate = employeeRepo.create({
-		name: 'My Employee',
-	});
-	// Assign the created contact to the employee
+	const contactCreate = new entities.Contact();
+	contactCreate.name = 'My Contact';
+	const employeeCreate = new entities.Employee();
+	employeeCreate.name = 'My Employee';
 	employeeCreate.contact = contactCreate;
 
 	// Persist entities
@@ -62,9 +60,8 @@ async function main() {
 	if (!contact) throw new Error('no contact found');
 
 	// Create a new address and persist it
-	const address = addressRepo.create({
-		name: 'My Address',
-	});
+	const address = new entities.Address();
+	address.name = 'My Address';
 	addressRepo.persist(address);
 
 	// Assign the created address to the contact
