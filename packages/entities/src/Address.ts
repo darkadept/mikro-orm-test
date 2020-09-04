@@ -2,7 +2,7 @@ import {v4} from 'uuid';
 import {Entity, PrimaryKey, Property} from 'mikro-orm';
 
 @Entity()
-export class Inverse {
+export class Address {
 	@PrimaryKey({type: 'uuid'})
 	id = v4();
 

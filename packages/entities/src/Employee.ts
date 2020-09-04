@@ -1,15 +1,15 @@
 import {v4} from 'uuid';
 import {Entity, OneToOne, PrimaryKey, Property} from 'mikro-orm';
-import {Inverse} from './Inverse';
+import {Contact} from './Contact';
 
 @Entity()
-export class Owner {
+export class Employee {
 	@PrimaryKey({type: 'uuid'})
 	id = v4();
 
 	@Property({type: 'string'})
 	name!: string;
 
-	@OneToOne({type: Inverse})
-	myInverse!: Inverse;
+	@OneToOne({type: Contact, nullable: true})
+	contact?: Contact;
 }

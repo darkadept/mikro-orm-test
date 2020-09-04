@@ -1,6 +1,3 @@
-import {Owner} from './Owner';
-import {Inverse} from './Inverse';
-
-export {Owner, Inverse};
-
-export const entities = [Owner, Inverse];
+export {Contact} from './Contact';
+export {Address} from './Address';
+export {Employee} from './Employee';
