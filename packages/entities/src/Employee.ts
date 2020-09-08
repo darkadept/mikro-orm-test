@@ -1,5 +1,5 @@
 import {v4} from 'uuid';
-import {Entity, OneToOne, PrimaryKey, Property} from 'mikro-orm';
+import {Entity, OneToOne, PrimaryKey, Property} from '@mikro-orm/core';
 import {Contact} from './Contact';
 
 @Entity()

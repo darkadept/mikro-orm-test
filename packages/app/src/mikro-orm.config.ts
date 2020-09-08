@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import type {Options} from 'mikro-orm';
+import type {Options} from '@mikro-orm/core';
 import {Employee, Address, Contact} from 'motest-entities';
 
 export const entities = {

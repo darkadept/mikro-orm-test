@@ -15,7 +15,7 @@
 		"@types/uuid": "^8.3.0",
 		"babel-loader": "^8.1.0",
 		"inspect-loader": "^1.0.0",
-		"mikro-orm": "^3.6.15",
+		"@mikro-orm/core": "^4.0.0-rc.8",
 		"readline-promise": "^1.0.4",
 		"rimraf": "^3.0.2",
 		"typescript": "^3.9.7",

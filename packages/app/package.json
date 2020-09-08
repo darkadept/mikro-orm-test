@@ -18,11 +18,12 @@
 	},
 	"dependencies": {
 		"@babel/runtime": "^7.11.2",
-		"mikro-orm": "^3.6.15",
+		"@mikro-orm/core": "^4.0.0-rc.8",
+		"@mikro-orm/postgresql": "^4.0.0-rc.8",
+		"@mikro-orm/cli": "^4.0.0-rc.8",
 		"debug": "^4.1.1",
 		"dotenv": "^8.2.0",
 		"motest-entities": "^0.0.1",
-		"pg": "^8.3.3",
 		"uuid": "^8.3.0"
 	},
 	"mikro-orm": {

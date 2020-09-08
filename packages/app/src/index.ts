@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import debug from 'debug';
-import {MikroORM} from 'mikro-orm';
+import {MikroORM} from '@mikro-orm/core';
 import {mikroOrmConfig, entities} from './mikro-orm.config';
 
 const d = debug('motest');
@@ -31,10 +31,9 @@ async function main() {
 	const employeeRepo = mo.em.getRepository(entities.Employee);
 
 	// Remove existing data
-	contactRepo.remove({});
-	addressRepo.remove({});
-	employeeRepo.remove({});
-	await mo.em.flush();
+	await contactRepo.nativeDelete({});
+	await addressRepo.nativeDelete({});
+	await employeeRepo.nativeDelete({});
 
 	// Create a Contact and and Employee
 	const contactCreate = new entities.Contact();
