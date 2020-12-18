@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import debug from 'debug';
-import {MikroORM, wrap} from '@mikro-orm/core';
+import {LockMode, MikroORM, wrap} from '@mikro-orm/core';
 import {mikroOrmConfig, entities} from './mikro-orm.config';
 
 const d = debug('motest');
@@ -51,12 +51,19 @@ async function main() {
 	if (!contact) throw new Error('no contact found');
 
 	const data = {
+		id: contact.id,
+		version: contact.version,
+		name: 'Contact NAME',
 		arrayOfObjects: [
 			{one: 'ONE', two: 22}
 		]
 	}
 
-	wrap(contact).assign(data);
+	const {id, version, ...rest} = data;
+
+	const entity = await contactRepo.findOne(id, {lockVersion: version, lockMode: LockMode.OPTIMISTIC});
+	if (!entity) throw new Error('Could not optimistically lock entity');
+	wrap(entity).assign({...rest});
 
 	await mo.em.flush();
 }
