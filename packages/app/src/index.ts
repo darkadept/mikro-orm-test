@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import debug from 'debug';
-import {MikroORM} from '@mikro-orm/core';
+import {MikroORM, wrap} from '@mikro-orm/core';
 import {mikroOrmConfig, entities} from './mikro-orm.config';
 
 const d = debug('motest');
@@ -49,6 +49,14 @@ async function main() {
 	// Find my contact previously created
 	const contact = await contactRepo.findOne(contactId);
 	if (!contact) throw new Error('no contact found');
+
+	const data = {
+		arrayOfObjects: [
+			{one: 'ONE', two: 22}
+		]
+	}
+
+	wrap(contact).assign(data);
 
 	await mo.em.flush();
 }
