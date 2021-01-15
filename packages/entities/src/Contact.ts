@@ -12,7 +12,6 @@ export class Contact {
 	@Property({type: 'string'})
 	name!: string;
 
-	// according to the docks this should work
-	@OneToOne('Contact', 'friend', {nullable: true})
-	friend?: Contact | null;
+	@OneToOne('Contact')
+	friend!: Contact;
 }
