@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import debug from 'debug';
-import {LockMode, MikroORM, wrap} from '@mikro-orm/core';
+import {MikroORM} from '@mikro-orm/core';
 import {mikroOrmConfig, entities} from './mikro-orm.config';
 
 const d = debug('motest');
@@ -34,13 +34,17 @@ async function main() {
 	// Create a Contact and and Employee
 	const contactCreate = new entities.Contact();
 	contactCreate.name = 'My Contact';
-	contactCreate.arrayOfObjects = [{one: 'one', two: 2}]
+
+	const friendCreate = new entities.Contact();
+	friendCreate.name = 'Friend';
+	contactCreate.friend = friendCreate;
 
 	// Persist entities
 	contactRepo.persist(contactCreate);
 
 	// Save the ID's for later
 	const contactId = contactCreate.id;
+	const friendId = friendCreate.id;
 
 	// Flush and then clear the identity map
 	await mo.em.flush();
@@ -49,21 +53,13 @@ async function main() {
 	// Find my contact previously created
 	const contact = await contactRepo.findOne(contactId);
 	if (!contact) throw new Error('no contact found');
+	// Find my friend previously created
+	const friend = await contactRepo.findOne(friendId);
+	if (!friend) throw new Error('no contact found');
 
-	const data = {
-		id: contact.id,
-		version: contact.version,
-		name: 'Contact NAME',
-		arrayOfObjects: [
-			{one: 'ONE', two: 22}
-		]
-	}
+	d('contact', contact);
+	d('friend', friend);
 
-	const {id, version, ...rest} = data;
-
-	const entity = await contactRepo.findOne(id, {lockVersion: version, lockMode: LockMode.OPTIMISTIC});
-	if (!entity) throw new Error('Could not optimistically lock entity');
-	wrap(entity).assign({...rest});
 
 	await mo.em.flush();
 }

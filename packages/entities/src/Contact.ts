@@ -1,10 +1,5 @@
-import {Entity, JsonType, PrimaryKey, Property} from '@mikro-orm/core';
+import {Entity, OneToOne, PrimaryKey, Property} from '@mikro-orm/core';
 import {v4} from 'uuid';
-
-interface ArrayObjects {
-	one: string;
-	two: number;
-}
 
 @Entity()
 export class Contact {
@@ -17,6 +12,7 @@ export class Contact {
 	@Property({type: 'string'})
 	name!: string;
 
-	@Property({type: JsonType})
-	arrayOfObjects!: ArrayObjects[];
+	// according to the docks this should work
+	@OneToOne('Contact', 'friend', {nullable: true})
+	friend?: Contact | null;
 }
