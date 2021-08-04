@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import debug from 'debug';
 import {MikroORM} from '@mikro-orm/core';
-import {entities} from 'motest-entities';
+import {entities} from './entities';
 import {mikroOrmConfig} from './mikro-orm.config';
 
 const d = debug('motest');
@@ -27,7 +27,7 @@ async function main() {
 	mo = await MikroORM.init(mikroOrmConfig);
 
 	// Get repositories
-	const myEntRepo = mo.em.getRepository(entities.MyPkg);
+	const myEntRepo = mo.em.getRepository(entities.MyEnt);
 	const myPkgEntRepo = mo.em.getRepository(entities.MyPkgEnt);
 
 	// Create first entity

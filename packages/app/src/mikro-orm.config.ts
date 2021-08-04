@@ -1,9 +1,9 @@
 import 'dotenv/config';
 import type {Options} from '@mikro-orm/core';
-import {entities} from 'motest-entities';
+import {entities} from './entities';
 
 export const mikroOrmConfig: Options = {
-	entities,
+	entities: Object.values(entities),
 	clientUrl: process.env.CLIENTURL,
 	type: 'postgresql',
 	debug: true,

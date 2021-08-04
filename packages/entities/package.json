@@ -6,7 +6,7 @@
 	"author": "Mike Kornelson <darkadept@durbn.net>",
 	"private": true,
 	"engines": {
-		"node": ">=12"
+		"node": ">=14"
 	},
 	"main": "dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -21,10 +21,10 @@
 		"ts": "tsc"
 	},
 	"dependencies": {
-		"debug": "^4.1.1",
-		"uuid": "^8.3.0"
+		"debug": "^4.3.2",
+		"uuid": "^8.3.2"
 	},
 	"peerDependencies": {
-		"@mikro-orm/core": "^4.0.0-rc.6"
+		"@mikro-orm/core": "4.x"
 	}
 }

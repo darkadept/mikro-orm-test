@@ -1,3 +1,5 @@
 import {MyPkgEnt} from './MyPkgEnt';
 
-export const entities = [MyPkgEnt];
+export const entities = {
+	MyPkgEnt,
+};

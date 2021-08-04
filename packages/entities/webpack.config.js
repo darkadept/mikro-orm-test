@@ -13,8 +13,9 @@ module.exports = {
 	output: {
 		filename: 'index.js',
 		path: path.resolve(__dirname, 'dist'),
-		library: name,
-		libraryTarget: 'commonjs2',
+		library: {
+			type: 'commonjs2',
+		},
 	},
 	resolve: {
 		extensions: ['.mjs', '.js', '.ts', '.d.ts'],
@@ -51,12 +52,6 @@ module.exports = {
 						},
 					},
 				],
-			},
-			{
-				test: /\.mjs$/,
-				include: /node_modules/,
-				type: 'javascript/auto',
-				use: [inspectLoader('NODE-MJS')],
 			},
 		],
 	}
